@@ -1,0 +1,77 @@
+# Hello Java Maven + Jenkins
+
+A simple Java Hello World project built with Maven and integrated into Jenkins for continuous integration (CI).
+
+## 📂 Project Structure
+hello-java-maven/
+ ├── pom.xml
+ └── src/
+     └── main/
+         └── java/
+             └── HelloWorld.java
+
+## 🖥️ Code
+
+HelloWorld.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, Jenkins + Maven!");
+    }
+}
+
+pom.xml
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>hello</artifactId>
+    <version>1.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+## 🚀 How to Run Locally
+
+1. Install Prerequisites
+   - Java JDK 8 or 11
+   - Apache Maven
+   - (Optional) Git
+
+2. Clone the Repository
+   git clone https://github.com/your-username/hello-java-maven.git
+   cd hello-java-maven
+
+3. Build with Maven
+   mvn clean package
+
+4. Run the Program
+   java -cp target/hello-1.0.jar HelloWorld
+
+## 🛠️ Running with Jenkins
+
+1. Start Jenkins  
+   docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts  
+   Unlock Jenkins and install suggested plugins.
+
+2. Configure Maven  
+   - Go to Manage Jenkins → Global Tool Configuration
+   - Add Maven (e.g., Maven 3.8.6)
+
+3. Create a Freestyle Job  
+   - Source Code Management: Link Git repo or local path  
+   - Build Step: Invoke top-level Maven targets → `clean package`
+
+4. Build & Verify  
+   - Click Build Now  
+   - Check Console Output → You should see:  
+     [INFO] BUILD SUCCESS
